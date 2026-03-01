@@ -1,8 +1,9 @@
-import React, { Suspense, useRef } from "react";
+import React, { Suspense, useRef, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, Environment, ContactShadows, Text, Float, Html } from "@react-three/drei";
 import { PAGES } from "../constants";
 import * as THREE from "three";
+import { FallbackScene } from "./FallbackScene";
 import { 
   BarterStage, 
   DeptStoreStage, 
@@ -120,9 +121,45 @@ const SceneContent: React.FC<ExperienceProps> = ({ currentPage }) => {
 };
 
 export const Scene: React.FC<ExperienceProps> = ({ currentPage }) => {
+  const [webglSupported, setWebglSupported] = useState<boolean | null>(null);
+  const [contextLost, setContextLost] = useState(false);
+
+  useEffect(() => {
+    // WebGL support detection
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      setWebglSupported(!!gl);
+    } catch (e) {
+      setWebglSupported(false);
+    }
+  }, []);
+
+  if (webglSupported === false || contextLost) {
+    return <FallbackScene currentPage={currentPage} />;
+  }
+
+  // Still detecting
+  if (webglSupported === null) {
+    return <div className="fixed inset-0 bg-black" />;
+  }
+
   return (
     <div className="fixed inset-0 bg-black">
-      <Canvas shadows dpr={[1, 2]} gl={{ antialias: true, alpha: false }}>
+      <Canvas 
+        shadows 
+        dpr={[1, 1.5]} // Reduced DPR for performance
+        gl={{ 
+          antialias: false, // Performance boost
+          alpha: false,
+          powerPreference: "high-performance",
+          failIfMajorPerformanceCaveat: true // Fail gracefully if performance is poor
+        }}
+        onCreated={({ gl }) => {
+          gl.domElement.addEventListener('webglcontextlost', () => setContextLost(true));
+        }}
+        onError={() => setWebglSupported(false)}
+      >
         <SceneContent currentPage={currentPage} />
       </Canvas>
     </div>
