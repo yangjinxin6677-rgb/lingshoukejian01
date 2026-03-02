@@ -16,13 +16,13 @@ export const TransitionStage: React.FC = () => {
 
   return (
     <group ref={group}>
-      <Torus args={[10, 0.05, 12, 48]} rotation={[Math.PI / 2, 0, 0]}>
+      <Torus args={[10, 0.05, 8, 32]} rotation={[Math.PI / 2, 0, 0]}>
         <meshStandardMaterial color="#10b981" transparent opacity={0.1} />
       </Torus>
-      <Torus args={[8, 0.02, 8, 32]} rotation={[0, Math.PI / 2, 0]}>
+      <Torus args={[8, 0.02, 6, 24]} rotation={[0, Math.PI / 2, 0]}>
         <meshStandardMaterial color="#10b981" transparent opacity={0.05} />
       </Torus>
-      <Sphere args={[0.1, 8, 8]} position={[0, 0, 0]}>
+      <Sphere args={[0.1, 6, 6]} position={[0, 0, 0]}>
         <meshStandardMaterial color="#10b981" emissive="#10b981" emissiveIntensity={2} />
       </Sphere>
     </group>
@@ -131,14 +131,14 @@ export const BarterStage: React.FC<{ active: boolean }> = ({ active }) => {
         <meshStandardMaterial color="#8b4513" />
       </Box>
       <group ref={farmerRef} position={[-3, 0, 0]}>
-        <Cylinder args={[0.4, 0.5, 1.5, 8]} position={[0, 0.75, 0]}><meshStandardMaterial color="#228b22" /></Cylinder>
-        <Sphere args={[0.3, 12, 12]} position={[0, 1.7, 0]}><meshStandardMaterial color="#ffdbac" /></Sphere>
+        <Cylinder args={[0.4, 0.5, 1.5, 6]} position={[0, 0.75, 0]}><meshStandardMaterial color="#228b22" /></Cylinder>
+        <Sphere args={[0.3, 8, 8]} position={[0, 1.7, 0]}><meshStandardMaterial color="#ffdbac" /></Sphere>
         <Box ref={woolRef} args={[0.4, 0.4, 0.4]} position={[0.5, 1, 0]}><meshStandardMaterial color="#f5f5f5" /></Box>
       </group>
       <group ref={artisanRef} position={[3, 0, 0]}>
-        <Cylinder args={[0.4, 0.5, 1.5, 8]} position={[0, 0.75, 0]}><meshStandardMaterial color="#8b0000" /></Cylinder>
-        <Sphere args={[0.3, 12, 12]} position={[0, 1.7, 0]}><meshStandardMaterial color="#ffdbac" /></Sphere>
-        <Cylinder ref={potRef} args={[0.2, 0.3, 0.4, 8]} position={[-0.5, 1, 0]}><meshStandardMaterial color="#cd853f" /></Cylinder>
+        <Cylinder args={[0.4, 0.5, 1.5, 6]} position={[0, 0.75, 0]}><meshStandardMaterial color="#8b0000" /></Cylinder>
+        <Sphere args={[0.3, 8, 8]} position={[0, 1.7, 0]}><meshStandardMaterial color="#ffdbac" /></Sphere>
+        <Cylinder ref={potRef} args={[0.2, 0.3, 0.4, 6]} position={[-0.5, 1, 0]}><meshStandardMaterial color="#cd853f" /></Cylinder>
       </group>
     </group>
   );
@@ -165,11 +165,11 @@ export const DeptStoreStage: React.FC<{ active: boolean }> = ({ active }) => {
         <meshStandardMaterial color="#333" />
       </Box>
       <Box args={[2, 3, 0.1]} position={[0, 1.5, -2]}><meshStandardMaterial color="#add8e6" transparent opacity={0.4} /></Box>
-      <Cylinder ref={gear1} args={[1.5, 1.5, 0.3, 12]} position={[-5, 5, -3]} rotation={[Math.PI / 2, 0, 0]}><meshStandardMaterial color="#555" /></Cylinder>
-      <Cylinder ref={gear2} args={[1, 1, 0.3, 12]} position={[-3.2, 5.5, -3.1]} rotation={[Math.PI / 2, 0, 0]}><meshStandardMaterial color="#666" /></Cylinder>
+      <Cylinder ref={gear1} args={[1.5, 1.5, 0.3, 8]} position={[-5, 5, -3]} rotation={[Math.PI / 2, 0, 0]}><meshStandardMaterial color="#555" /></Cylinder>
+      <Cylinder ref={gear2} args={[1, 1, 0.3, 8]} position={[-3.2, 5.5, -3.1]} rotation={[Math.PI / 2, 0, 0]}><meshStandardMaterial color="#666" /></Cylinder>
       <group ref={customer} position={[0, 0, 4]}>
-        <Cylinder args={[0.2, 0.2, 1.2, 8]} position={[0, 0.6, 0]}><meshStandardMaterial color="#4f46e5" /></Cylinder>
-        <Sphere args={[0.15, 12, 12]} position={[0, 1.3, 0]}><meshStandardMaterial color="#ffdbac" /></Sphere>
+        <Cylinder args={[0.2, 0.2, 1.2, 6]} position={[0, 0.6, 0]}><meshStandardMaterial color="#4f46e5" /></Cylinder>
+        <Sphere args={[0.15, 8, 8]} position={[0, 1.3, 0]}><meshStandardMaterial color="#ffdbac" /></Sphere>
       </group>
     </group>
   );
@@ -257,8 +257,8 @@ export const SupermarketStage: React.FC<{ active: boolean }> = ({ active }) => {
           <Box args={[0.3, 0.3, 0.3]}><meshStandardMaterial color="blue" /></Box>
         </group>
         <group position={[-1, 0, 0]}>
-           <Cylinder args={[0.2, 0.2, 1.4, 8]} position={[0, 0.7, 0]}><meshStandardMaterial color="#334155" /></Cylinder>
-           <Sphere args={[0.15, 12, 12]} position={[0, 1.5, 0]}><meshStandardMaterial color="#ffdbac" /></Sphere>
+           <Cylinder args={[0.2, 0.2, 1.4, 6]} position={[0, 0.7, 0]}><meshStandardMaterial color="#334155" /></Cylinder>
+           <Sphere args={[0.15, 8, 8]} position={[0, 1.5, 0]}><meshStandardMaterial color="#ffdbac" /></Sphere>
         </group>
       </group>
     </group>
@@ -340,8 +340,8 @@ export const NewRetailStage: React.FC<{ active: boolean }> = ({ active }) => {
         <Box args={[0.5, 0.5, 0.5]} position={[0, -0.4, 0]}><meshStandardMaterial color="#d2b48c" /></Box>
       </group>
       <group position={[4, 0, 0]}>
-        <Cylinder args={[0.3, 0.3, 1.6, 8]} position={[0, 0.8, 0]}><meshStandardMaterial color="#312e81" /></Cylinder>
-        <Sphere args={[0.2, 12, 12]} position={[0, 1.8, 0]}><meshStandardMaterial color="#ffdbac" /></Sphere>
+        <Cylinder args={[0.3, 0.3, 1.6, 6]} position={[0, 0.8, 0]}><meshStandardMaterial color="#312e81" /></Cylinder>
+        <Sphere args={[0.2, 8, 8]} position={[0, 1.8, 0]}><meshStandardMaterial color="#ffdbac" /></Sphere>
         <Box args={[0.1, 0.2, 0.05]} position={[-0.3, 1.3, 0.3]} rotation={[0.6, 0, 0]}><meshStandardMaterial color="#0ff" emissive="#0ff" /></Box>
       </group>
     </group>
@@ -383,20 +383,18 @@ export const ImpactStage: React.FC<{ type: 'industry' | 'logistics' | 'employmen
       )}
       {type === 'logistics' && (
         <group>
-          <Float speed={3} rotationIntensity={1} floatIntensity={1}>
-            <Box args={[3, 1.5, 1.5]} position={[0, 2, 0]}><meshStandardMaterial color="#ea580c" /></Box>
-          </Float>
-          <Cylinder args={[0.05, 0.05, 10]} position={[0, 0.1, 0]} rotation={[0, 0, Math.PI/2]}><meshStandardMaterial color="#444" /></Cylinder>
+          <Box args={[3, 1.5, 1.5]} position={[0, 2, 0]}><meshStandardMaterial color="#ea580c" /></Box>
+          <Cylinder args={[0.05, 0.05, 10, 4]} position={[0, 0.1, 0]} rotation={[0, 0, Math.PI/2]}><meshStandardMaterial color="#444" /></Cylinder>
         </group>
       )}
       {type === 'employment' && (
         <group>
-          {Array.from({ length: 12 }).map((_, i) => (
-            <group key={i} position={[(i - 5.5) * 1, 0, Math.sin(i) * 3]}>
-              <Cylinder args={[0.2, 0.2, 1.2]} position={[0, 0.6, 0]}>
-                <meshStandardMaterial color={new THREE.Color().setHSL(i / 12, 0.6, 0.5)} />
+          {Array.from({ length: 8 }).map((_, i) => (
+            <group key={i} position={[(i - 3.5) * 1.2, 0, Math.sin(i) * 2]}>
+              <Cylinder args={[0.2, 0.2, 1.2, 6]} position={[0, 0.6, 0]}>
+                <meshStandardMaterial color={new THREE.Color().setHSL(i / 8, 0.6, 0.5)} />
               </Cylinder>
-              <Sphere args={[0.15]} position={[0, 1.4, 0]}><meshStandardMaterial color="#ffdbac" /></Sphere>
+              <Sphere args={[0.15, 8, 8]} position={[0, 1.4, 0]}><meshStandardMaterial color="#ffdbac" /></Sphere>
             </group>
           ))}
         </group>
@@ -439,14 +437,14 @@ export const TheoryStage: React.FC<{ type: 'wheel' | 'accordion' }> = ({ type })
     <group position={[0, 0, 0]}>
       {type === 'wheel' && (
         <group ref={wheel}>
-          <Torus args={[4, 0.1, 12, 48]} rotation={[Math.PI/2, 0, 0]}>
+          <Torus args={[4, 0.1, 8, 32]} rotation={[Math.PI/2, 0, 0]}>
             <meshStandardMaterial color="#4f46e5" emissive="#4f46e5" emissiveIntensity={0.5} />
           </Torus>
           <Text position={[0, 0, 4.5]} fontSize={0.4} color="white">LOW PRICE</Text>
           <Text position={[4.5, 0, 0]} fontSize={0.4} color="white" rotation={[0, Math.PI/2, 0]}>LOW STATUS</Text>
           <Text position={[0, 0, -4.5]} fontSize={0.4} color="white" rotation={[0, Math.PI, 0]}>HIGH COST</Text>
           <Text position={[-4.5, 0, 0]} fontSize={0.4} color="white" rotation={[0, -Math.PI/2, 0]}>HIGH PRICE</Text>
-          <Sphere name="indicator" args={[0.3, 16, 16]} position={[0, 0, 4]}>
+          <Sphere name="indicator" args={[0.3, 8, 8]} position={[0, 0, 4]}>
             <meshStandardMaterial color="#fbbf24" emissive="#fbbf24" />
           </Sphere>
         </group>
@@ -480,16 +478,14 @@ export const FutureStage: React.FC = () => {
 
   return (
     <group>
-      <Float speed={4} rotationIntensity={1} floatIntensity={1}>
-        <mesh>
-          <sphereGeometry args={[2, 24, 24]} />
-          <MeshDistortMaterial color="#020617" speed={2} distort={0.5} />
-        </mesh>
-        <Text position={[0, 0, 2.1]} fontSize={3} color="#fff">?</Text>
-      </Float>
+      <mesh>
+        <sphereGeometry args={[2, 16, 16]} />
+        <MeshDistortMaterial color="#020617" speed={2} distort={0.5} />
+      </mesh>
+      <Text position={[0, 0, 2.1]} fontSize={3} color="#fff">?</Text>
       <group ref={particles}>
-        {Array.from({ length: 40 }).map((_, i) => (
-          <Sphere key={i} args={[0.05, 6, 6]} position={[(Math.random()-0.5)*15, (Math.random()-0.5)*15, (Math.random()-0.5)*15]}>
+        {Array.from({ length: 20 }).map((_, i) => (
+          <Sphere key={i} args={[0.05, 4, 4]} position={[(Math.random()-0.5)*15, (Math.random()-0.5)*15, (Math.random()-0.5)*15]}>
             <meshStandardMaterial color={new THREE.Color().setHSL(Math.random(), 0.8, 0.6)} emissive="white" emissiveIntensity={0.3} />
           </Sphere>
         ))}

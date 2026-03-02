@@ -20,6 +20,7 @@ import {
 
 interface ExperienceProps {
   currentPage: number;
+  forceFallback?: boolean;
 }
 
 const Loader = () => (
@@ -63,9 +64,8 @@ const SceneContent: React.FC<ExperienceProps> = ({ currentPage }) => {
         autoRotateSpeed={0.5}
       />
       
-      <ambientLight intensity={0.8} />
-      <pointLight position={[10, 10, 10]} intensity={1.2} />
-      <spotLight position={[-10, 20, 10]} angle={0.15} penumbra={1} intensity={2} castShadow />
+      <ambientLight intensity={1.0} />
+      <pointLight position={[5, 5, 5]} intensity={1.5} />
       
       <Suspense fallback={<Loader />}>
         <group>
@@ -73,20 +73,18 @@ const SceneContent: React.FC<ExperienceProps> = ({ currentPage }) => {
           
           {currentPage === 0 && (
             <>
-              <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-                <group>
-                  <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]}>
-                      <planeGeometry args={[30, 30]} />
-                      <meshStandardMaterial color="#111" />
-                  </mesh>
-                  <Text position={[0, 1, 0]} fontSize={1.5} color="white">
-                    RETAIL EXPLORATION
-                  </Text>
-                  <Text position={[0, 0, 0]} fontSize={0.5} color="#10b981" fillOpacity={0.8}>
-                    商业文明的时光穿梭机
-                  </Text>
-                </group>
-              </Float>
+              <group>
+                <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]}>
+                    <planeGeometry args={[30, 30]} />
+                    <meshStandardMaterial color="#111" />
+                </mesh>
+                <Text position={[0, 1, 0]} fontSize={1.5} color="white">
+                  RETAIL EXPLORATION
+                </Text>
+                <Text position={[0, 0, 0]} fontSize={0.5} color="#10b981" fillOpacity={0.8}>
+                  商业文明的时光穿梭机
+                </Text>
+              </group>
               <LogoCloud active={true} />
             </>
           )}
@@ -112,15 +110,12 @@ const SceneContent: React.FC<ExperienceProps> = ({ currentPage }) => {
           {/* Future Stage */}
           {currentPage === 17 && <FutureStage />}
         </group>
-        
-        <ContactShadows opacity={0.3} scale={30} blur={2} far={10} />
-        <Environment preset="city" />
       </Suspense>
     </>
   );
 };
 
-export const Scene: React.FC<ExperienceProps> = ({ currentPage }) => {
+export const Scene: React.FC<ExperienceProps> = ({ currentPage, forceFallback }) => {
   const [webglSupported, setWebglSupported] = useState<boolean | null>(null);
   const [contextLost, setContextLost] = useState(false);
 
@@ -135,7 +130,7 @@ export const Scene: React.FC<ExperienceProps> = ({ currentPage }) => {
     }
   }, []);
 
-  if (webglSupported === false || contextLost) {
+  if (webglSupported === false || contextLost || forceFallback) {
     return <FallbackScene currentPage={currentPage} />;
   }
 
@@ -147,13 +142,14 @@ export const Scene: React.FC<ExperienceProps> = ({ currentPage }) => {
   return (
     <div className="fixed inset-0 bg-black">
       <Canvas 
-        shadows 
-        dpr={[1, 1.5]} // Reduced DPR for performance
+        dpr={1} // Fixed DPR 1 for maximum performance
         gl={{ 
-          antialias: false, // Performance boost
+          antialias: false, 
           alpha: false,
           powerPreference: "high-performance",
-          failIfMajorPerformanceCaveat: true // Fail gracefully if performance is poor
+          failIfMajorPerformanceCaveat: true,
+          stencil: false, // Disable stencil for performance
+          depth: true
         }}
         onCreated={({ gl }) => {
           gl.domElement.addEventListener('webglcontextlost', () => setContextLost(true));

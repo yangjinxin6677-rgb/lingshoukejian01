@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronLeft, ChevronRight, Info, MessageSquare, Sparkles, BarChart3 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Info, MessageSquare, Sparkles, BarChart3, Zap, ZapOff } from "lucide-react";
 import { PAGES } from "../constants";
 import { Category } from "../types";
 
 interface OverlayProps {
   currentPage: number;
   setCurrentPage: (page: number) => void;
+  isLowPower: boolean;
+  setIsLowPower: (val: boolean) => void;
 }
 
-export const Overlay: React.FC<OverlayProps> = ({ currentPage, setCurrentPage }) => {
+export const Overlay: React.FC<OverlayProps> = ({ currentPage, setCurrentPage, isLowPower, setIsLowPower }) => {
   const page = PAGES[currentPage];
   const [revealed, setRevealed] = useState(false);
   const [pollVoted, setPollVoted] = useState(false);
@@ -86,6 +88,22 @@ export const Overlay: React.FC<OverlayProps> = ({ currentPage, setCurrentPage })
 
         {/* Progress Bar */}
         <div className="flex flex-col items-end gap-2 mt-4">
+          <div className="flex items-center gap-4 mb-2">
+            <button
+              onClick={() => setIsLowPower(!isLowPower)}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all ${
+                isLowPower 
+                  ? "bg-amber-500/20 border-amber-500/50 text-amber-500" 
+                  : "bg-white/5 border-white/10 text-white/40 hover:text-white hover:bg-white/10"
+              }`}
+              title={isLowPower ? "当前为流畅模式 (2D)" : "当前为极致模式 (3D)"}
+            >
+              {isLowPower ? <ZapOff className="w-3.5 h-3.5" /> : <Zap className="w-3.5 h-3.5" />}
+              <span className="text-[10px] font-bold uppercase tracking-wider">
+                {isLowPower ? "流畅模式" : "极致模式"}
+              </span>
+            </button>
+          </div>
           <div className="flex gap-1">
             {PAGES.map((_, i) => (
               <button
